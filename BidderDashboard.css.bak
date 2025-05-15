@@ -1,0 +1,138 @@
+/* BidderDashboard.css - Original Light Theme */
+
+.bidder-dashboard {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  color: #333;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.bidder-dashboard h1 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+}
+
+.bidder-dashboard ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.bid-card {
+  background-color: #fff;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.bid-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.bid-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #3498db;
+}
+
+.bid-card p {
+  margin: 0.25rem 0;
+  color: #333;
+}
+
+.bid-input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  margin-right: 0.5rem;
+  width: 150px;
+  transition: border-color 0.2s ease;
+}
+
+.bid-input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.bid-button {
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.bid-button:hover {
+  background-color: #2980b9;
+}
+
+.bid-history {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.bid-status {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.bid-status.success {
+  background-color: #e8f5e9;
+  color: #388e3c;
+  border: 1px solid #c8e6c9;
+}
+
+.bid-status.error {
+  background-color: #ffebee;
+  color: #d32f2f;
+  border: 1px solid #ffcdd2;
+}
+
+.bid-button:disabled,
+.bid-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bid-button:disabled {
+  background-color: #bdc3c7;
+}
+
+.error-message {
+  color: #c62828;
+  background-color: #ffebee;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ef9a9a;
+  margin: 1rem 0;
+}
+
+.place-bid-section {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Add animation for status messages */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bid-status {
+  animation: fadeIn 0.3s ease-out;
+}

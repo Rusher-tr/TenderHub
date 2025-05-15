@@ -1,0 +1,182 @@
+// src/dashboards/BuyerDashboard.jsx
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+import './BuyerDashboard.css';
+import { useTenders } from '../useTenders';
+
+const BuyerDashboard = () => {
+  const { tenders, createTender, refreshTenders, loading } = useTenders();
+  const { user, loading: authLoading } = useAuth();
+  const [form, setForm] = useState({
+    title: '',
+    description: '',
+    issue_date: '',
+    deadline: ''
+  });
+  const [error, setError] = useState(null);
+
+  // Check if user is actually a buyer
+  if (!authLoading && (!user || user.role !== 'Buyer')) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // Ensure tenders are loaded when component mounts
+  useEffect(() => {
+    refreshTenders();
+  }, [refreshTenders]);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const createTenderHandler = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    // Validate dates
+    const issueDate = new Date(form.issue_date + 'T00:00:00Z');
+    const deadline = new Date(form.deadline + 'T00:00:00Z');
+
+    if (isNaN(issueDate.getTime())) {
+      setError('Invalid issue date');
+      return;
+    }
+
+    if (isNaN(deadline.getTime())) {
+      setError('Invalid deadline');
+      return;
+    }
+
+    if (deadline <= issueDate) {
+      setError('Deadline must be after issue date');
+      return;
+    }
+
+    try {
+      const newTender = {
+        title: form.title,
+        description: form.description,
+        issue_date: form.issue_date,
+        deadline: form.deadline,
+        status: 'Pending Approval'
+      };
+
+      await createTender(newTender);
+      
+      // Reset form
+      setForm({
+        title: '',
+        description: '',
+        issue_date: '',
+        deadline: ''
+      });
+      
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  if (loading || authLoading) {
+    return (
+      <div className="buyer-dashboard">
+        <h1>Buyer Dashboard</h1>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="buyer-dashboard">
+      <h1>Buyer Dashboard</h1>
+      
+      <div className="dashboard-content">
+        <div className="create-tender-section">
+          <h2>Create New Tender</h2>
+          <form onSubmit={createTenderHandler} className="tender-form">
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+                required
+                placeholder="Enter tender title"
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+                required
+                placeholder="Describe the tender requirements"
+                rows="4"
+              ></textarea>
+            </div>
+            
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="issue_date">Issue Date</label>
+                <input
+                  type="date"
+                  id="issue_date"
+                  name="issue_date"
+                  value={form.issue_date}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="deadline">Deadline</label>
+                <input
+                  type="date"
+                  id="deadline"
+                  name="deadline"
+                  value={form.deadline}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+            
+            {error && <p className="error-message">{error}</p>}
+            
+            <button type="submit" className="submit-button">Create Tender</button>
+          </form>
+        </div>
+        
+        <div className="my-tenders-section">
+          <h2>My Tenders</h2>
+          {tenders.length === 0 ? (
+            <p>No tenders created yet.</p>
+          ) : (
+            <ul className="tender-list">
+              {tenders.map((tender) => (
+                <li key={tender.tender_id} className="tender-item">
+                  <div className="tender-header">
+                    <h3>{tender.title}</h3>
+                    <span className={`status ${tender.status.replace(' ', '-').toLowerCase()}`}>
+                      {tender.status}
+                    </span>
+                  </div>
+                  <p><strong>Description:</strong> {tender.description}</p>
+                  <p><strong>Issue Date:</strong> {new Date(tender.issue_date).toLocaleDateString()}</p>
+                  <p><strong>Deadline:</strong> {new Date(tender.deadline).toLocaleDateString()}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BuyerDashboard;

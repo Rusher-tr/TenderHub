@@ -1,0 +1,325 @@
+.admin-dashboard {
+  background-color: #1e1e2f;
+  color: #f1f1f1;
+  padding: 2rem;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-dashboard h1 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard h2 {
+  color: #00ffcc;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+}
+
+.admin-dashboard .published-tenders li {
+  border-left: 4px solid #00ffcc;
+}
+
+.admin-dashboard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-dashboard li {
+  background-color: #2c2c3e;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.admin-dashboard .tender-info {
+  flex: 1;
+}
+
+.admin-dashboard .tender-status {
+  text-align: right;
+  margin-left: 2rem;
+}
+
+.admin-dashboard .tender-info p {
+  margin: 0.5rem 0;
+}
+
+/* Status badge styling */
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.status-badge.pending {
+  background-color: #f0ad4e;
+  color: #000;
+}
+
+.status-badge.published {
+  background-color: #5cb85c;
+  color: #000;
+}
+
+.status-badge.rejected {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.status-badge.archived {
+  background-color: #777;
+  color: #fff;
+}
+
+/* Status guide section */
+.admin-dashboard-info {
+  background-color: #2c2c3e;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+}
+
+.status-guide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.status-guide li {
+  background: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Action buttons container */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Button styles */
+.approve-button, .reject-button, .archive-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.approve-button {
+  background-color: #5cb85c;
+  color: #fff;
+}
+
+.reject-button {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.archive-button {
+  background-color: #777;
+  color: #fff;
+}
+
+.approve-button:hover {
+  background-color: #449d44;
+}
+
+.reject-button:hover {
+  background-color: #c9302c;
+}
+
+.archive-button:hover {
+  background-color: #5e5e5e;
+}
+
+.admin-dashboard button {
+  padding: 0.6rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.admin-dashboard .approve-button {
+  background-color: green;
+  color: white;
+  border: none;
+  margin-right: 10px;
+  width: 120px;
+}
+
+.admin-dashboard .approve-button:hover {
+  background-color: #4e8b3d;
+}
+
+.admin-dashboard .reject-button {
+  background-color: red;
+  color: white;
+  border: none;
+  width: 120px;
+}
+
+.admin-dashboard .reject-button:hover {
+  background-color: #e60000;
+}
+
+.status-message {
+  margin-top: 0.5rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.status-message.success {
+  background-color: rgba(92, 184, 92, 0.2);
+  color: #5cb85c;
+}
+
+.status-message.error {
+  background-color: rgba(217, 83, 79, 0.2);
+  color: #d9534f;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.approve-button:disabled,
+.reject-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: rgba(255, 68, 68, 0.1);
+  color: #ff4444;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  border: 1px solid #ff4444;
+}
+
+.admin-dashboard .toggle-bid-details-button {
+  background-color: #4a90e2;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.admin-dashboard .toggle-bid-details-button:hover {
+  background-color: #357bd8;
+}
+
+.admin-dashboard .bid-details {
+  background-color: #383850;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.admin-dashboard .bids-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard .bid-item {
+  background-color: #2c2c45;
+  padding: 1rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.admin-dashboard .bid-item.selected {
+  border-color: #00c853;
+  box-shadow: 0 0 8px rgba(0, 200, 83, 0.4);
+}
+
+.admin-dashboard .bid-info {
+  flex: 1;
+}
+
+.admin-dashboard .bid-info p {
+  margin: 0.25rem 0;
+}
+
+.admin-dashboard .select-bid-button {
+  background-color: #00c853;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.admin-dashboard .select-bid-button:not(.selected) {
+  background-color: #455a64;
+}
+
+.admin-dashboard .select-winner-button {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.admin-dashboard .select-winner-button:hover {
+  background-color: #f57c00;
+}
+
+.admin-dashboard .select-winner-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.admin-dashboard .winner-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1rem;
+}
+
+.admin-dashboard .winner-item {
+  background-color: #2c3e50;
+  border-left: 4px solid gold;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.admin-dashboard .winner-info h3 {
+  color: gold;
+  margin-top: 0;
+}
+

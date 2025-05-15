@@ -1,0 +1,96 @@
+import React, { useState } from 'react';
+import './BuyerDashboard.css';
+import { useTenders } from '../useTenders';
+
+const BuyerDashboard = () => {
+  const { tenders, createTender } = useTenders();
+  const [form, setForm] = useState({
+    title: '',
+    description: '',
+    issueDate: '',
+    deadline: ''
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const createTenderHandler = (e) => {
+    e.preventDefault();
+    const newTender = {
+      title: form.title,
+      description: form.description,
+      issueDate: form.issueDate,
+      deadline: form.deadline,
+      status: 'Draft'  // Valid status value
+    };
+    createTender(newTender);
+    setForm({ title: '', description: '', issueDate: '', deadline: '' });
+  };
+
+  return (
+    <div className="buyer-dashboard">
+      <h1>Buyer Dashboard</h1>
+      <form onSubmit={createTenderHandler}>
+        <label>Issue Date:
+          <input
+            placeholder='Enter Issue Date'
+            type="date"
+            name="issueDate"
+            value={form.issueDate}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        
+        <input
+          type="text"
+          name="title"
+          placeholder="Project Name"
+          value={form.title}
+          onChange={handleChange}
+          required
+        />
+              
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={form.description}
+          onChange={handleChange}
+          required
+        />
+              
+        <label>Deadline:
+          <input
+            placeholder='Enter Deadline'
+            type="date"
+            name="deadline"  
+            value={form.deadline}  
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <button type="submit">Create Tender</button>
+      </form>
+      
+      <h2>Created Tenders:</h2>
+      <ul>
+        {tenders.map((tender) => (
+          <li key={tender.tender_id} className="tender-item">
+            <div>
+              <strong>{tender.title}</strong> ({new Date(tender.issueDate).toLocaleDateString()})<br />
+              {tender.description}<br />
+              <strong>Deadline:</strong> {new Date(tender.deadline).toLocaleDateString()}
+            </div>
+            <div className={`status-label ${tender.status?.toLowerCase().replace(/\s/g, '-')}`}>
+              {tender.status}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default BuyerDashboard;

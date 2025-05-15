@@ -1,0 +1,255 @@
+/* BuyerDashboard.css - Dark Theme */
+
+.buyer-dashboard {
+  background-color: #1e1e2f;
+  color: #f1f1f1;
+  padding: 2rem;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.buyer-dashboard h1,
+.buyer-dashboard h2 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.buyer-dashboard form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #2c2c3e;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+}
+
+.buyer-dashboard input,
+.buyer-dashboard textarea {
+  background-color: #3b3b4f;
+  color: #ffffff;
+  border: 1px solid #555;
+  border-radius: 5px;
+  padding: 0.8rem;
+  font-size: 1rem;
+}
+
+.buyer-dashboard input:focus,
+.buyer-dashboard textarea:focus {
+  border-color: #5e60ce;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(94, 96, 206, 0.2);
+}
+
+.buyer-dashboard button {
+  background-color: #5e60ce;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.buyer-dashboard button:hover {
+  background-color: #4e51b5;
+}
+
+.buyer-dashboard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.buyer-dashboard li {
+  background-color: #2c2c3e;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #5e60ce;
+}
+
+.tender-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.buyer-dashboard form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+/* Status badges for tenders */
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+}
+
+.status-badge.pending-approval {
+  background-color: #e9ba00;
+  color: #000;
+}
+
+.status-badge.published {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.status-badge.rejected {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.status-badge.archived {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.status-badge.draft {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+/* Status guide section */
+.status-info {
+  background-color: #2c2c3e;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+}
+
+.status-guide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.status-guide li {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border-left: none;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.tender-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.status-note {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: #aaa;
+  max-width: 250px;
+  text-align: right;
+}
+
+.tenders-list {
+  margin-top: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  color: #f1f1f1;
+  font-weight: 500;
+}
+
+.form-group input[type="date"] {
+  color-scheme: dark;
+  background-color: #3b3b4f;
+  color: #ffffff;
+  border: 1px solid #555;
+  border-radius: 5px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.error-message {
+  background-color: rgba(220, 53, 69, 0.2);
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 12px 16px;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.tender-section {
+  margin-bottom: 2rem;
+}
+
+.tender-section h3 {
+  color: #00ffcc;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+}
+
+.help-text {
+  color: #999;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.info-notification {
+  background-color: rgba(0, 255, 204, 0.1);
+  border: 1px solid #00ffcc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.info-notification h3 {
+  color: #00ffcc;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.info-notification p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Success and error messages */
+.success-message {
+  background-color: rgba(40, 167, 69, 0.2);
+  border: 1px solid #28a745;
+  color: #28a745;
+  padding: 12px 16px;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}

@@ -1,0 +1,163 @@
+import React, { useState, useEffect } from 'react';
+import { useTenders } from '../useTenders';
+import { useAuth } from '../AuthContext';
+import { Navigate } from 'react-router-dom';
+import * as api from '../api';
+import './AdminDashboard.css';
+
+const AdminDashboard = () => {
+  const { tenders, updateTenderStatus, loading, error, setTenders } = useTenders();
+  const { user, loading: authLoading } = useAuth();
+  const [statusMessages, setStatusMessages] = useState({});
+  const [adminLoading, setAdminLoading] = useState(false);
+  const [adminError, setAdminError] = useState(null);
+
+  // Check if user is actually an admin
+  if (!authLoading && (!user || user.role !== 'Admin')) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // Fetch all tenders for admin when component mounts
+  useEffect(() => {
+    const fetchAdminTenders = async () => {
+      setAdminLoading(true);
+      try {
+        const allTenders = await api.fetchAllTenders();
+        setTenders(allTenders);
+        setAdminError(null);
+      } catch (err) {
+        console.error("Error fetching admin tenders:", err);
+        setAdminError(err.message);
+      } finally {
+        setAdminLoading(false);
+      }
+    };
+
+    fetchAdminTenders();
+  }, [setTenders]);
+  
+  const handleStatusChange = async (tenderId, status) => {
+    try {
+      // Pass the specific tender ID to be updated
+      await updateTenderStatus(tenderId, status);
+      
+      // Refresh admin tenders to ensure we have the latest data
+      const updatedTenders = await api.fetchAllTenders();
+      setTenders(updatedTenders);
+      
+      // Show success message for this specific tender
+      setStatusMessages(prev => ({
+        ...prev,
+        [tenderId]: { type: 'success', message: `Tender status updated to ${status}` }
+      }));
+    } catch (err) {
+      setStatusMessages(prev => ({
+        ...prev,
+        [tenderId]: { type: 'error', message: err.message }
+      }));
+    }
+  };
+  
+  if (loading || adminLoading || authLoading) {
+    return (
+      <div className="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        <p>Loading tenders...</p>
+      </div>
+    );
+  }
+
+  if (error || adminError) {
+    return (
+      <div className="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        <p className="error-message">Error: {error || adminError}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="admin-dashboard">
+      <h1>Admin Dashboard</h1>
+      {tenders.length === 0 ? (
+        <p>No tenders created yet.</p>
+      ) : (
+        <>
+          <h2>Pending Approval</h2>
+          {tenders.filter(tender => tender.status === 'Pending Approval').length === 0 ? (
+            <p>No tenders pending approval.</p>
+          ) : (
+            <ul className="tender-list">
+              {tenders
+                .filter(tender => tender.status === 'Pending Approval')
+                .map((tender) => (
+                  <li key={tender.tender_id} className="tender-item">
+                    <div className="tender-info">
+                      <h3>{tender.title}</h3>
+                      <p><strong>Buyer:</strong> {tender.buyer_name}</p>
+                      <p><strong>Created On:</strong> {new Date(tender.issue_date).toLocaleDateString()}</p>
+                      <p><strong>Deadline:</strong> {new Date(tender.deadline).toLocaleDateString()}</p>
+                      <p><strong>Description:</strong> {tender.description}</p>
+                    </div>
+                    <div className="tender-status">
+                      <p><strong>Status:</strong> {tender.status}</p>
+                      {statusMessages[tender.tender_id] && (
+                        <p className={`status-message ${statusMessages[tender.tender_id].type}`}>
+                          {statusMessages[tender.tender_id].message}
+                        </p>
+                      )}
+                      <button
+                        onClick={() => handleStatusChange(tender.tender_id, 'Published')}
+                        className="approve-button"
+                        disabled={loading}
+                      >
+                        {loading ? 'Updating...' : 'Approve'}
+                      </button>
+                      <button
+                        onClick={() => handleStatusChange(tender.tender_id, 'Rejected')}
+                        className="reject-button"
+                        disabled={loading}
+                      >
+                        {loading ? 'Updating...' : 'Reject'}
+                      </button>
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          )}
+
+          <h2>Published Tenders</h2>
+          {tenders.filter(tender => tender.status === 'Published').length === 0 ? (
+            <p>No published tenders.</p>
+          ) : (
+            <ul className="tender-list published-tenders">
+              {tenders
+                .filter(tender => tender.status === 'Published')
+                .map((tender) => (
+                  <li key={tender.tender_id} className="tender-item">
+                    <div className="tender-info">
+                      <h3>{tender.title}</h3>
+                      <p><strong>Buyer:</strong> {tender.buyer_name}</p>
+                      <p><strong>Created On:</strong> {new Date(tender.issue_date).toLocaleDateString()}</p>
+                      <p><strong>Deadline:</strong> {new Date(tender.deadline).toLocaleDateString()}</p>
+                      <p><strong>Description:</strong> {tender.description}</p>
+                    </div>
+                    <div className="tender-status">
+                      <p><strong>Status:</strong> {tender.status}</p>
+                      {statusMessages[tender.tender_id] && (
+                        <p className={`status-message ${statusMessages[tender.tender_id].type}`}>
+                          {statusMessages[tender.tender_id].message}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default AdminDashboard;

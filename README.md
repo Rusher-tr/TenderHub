@@ -1,2 +1,2 @@
-# TenderHub
-Tender
+# TenderWeb
+Tender Web Application

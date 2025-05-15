@@ -1,0 +1,212 @@
+.evaluator-dashboard {
+  padding: 2rem;
+  background-color: #1e1e2f;
+  color: #f1f1f1;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.evaluator-dashboard h1, 
+.evaluator-dashboard h2 {
+  color: #6b8cff;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-info {
+  background-color: #2c2c3e;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+  border-left: 4px solid #6b8cff;
+}
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.unscored-section,
+.scored-section {
+  background-color: #2c2c3e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tender-card {
+  background-color: #363648;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #6b8cff;
+}
+
+.tender-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.tender-header h3 {
+  margin: 0;
+  color: #fff;
+}
+
+.deadline {
+  font-size: 0.9rem;
+  color: #ff9a9a;
+}
+
+.tender-description {
+  color: #ccc;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.bids-container {
+  background-color: #2c2c3e;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.bids-container h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #6b8cff;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+}
+
+.bid-row {
+  background-color: #22222e;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.bid-row.scored {
+  background-color: #2a324a;
+  border-left: 4px solid #6b8cff;
+}
+
+.bid-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bid-amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fdfdfd;
+}
+
+.bid-date {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.bid-scoring {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.score-input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.score-input {
+  width: 120px;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #1a1a27;
+  color: #fff;
+}
+
+.score-submit-button {
+  padding: 0.5rem 1rem;
+  background-color: #6b8cff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.score-submit-button:hover {
+  background-color: #5a75e6;
+}
+
+.score-submit-button:disabled {
+  background-color: #444;
+  cursor: not-allowed;
+}
+
+.score-status {
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.score-status.success {
+  background-color: rgba(107, 195, 146, 0.2);
+  color: #6bc392;
+}
+
+.score-status.error {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.evaluation-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.score-display {
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.evaluation-date {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.no-items {
+  color: #aaa;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+  background-color: #22222e;
+  border-radius: 6px;
+}
+
+.error-message {
+  background-color: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}

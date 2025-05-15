@@ -1,0 +1,150 @@
+/* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+  height: 100%;
+  background: linear-gradient(135deg, #000000, #434343);
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Page Wrapper: fills full height and uses flex column layout */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0 10px; /* Add padding to ensure content doesn't touch edges */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+/* Heading stays at the top */
+.heading-wrapper {
+  padding: 30px 0 20px;
+  text-align: center;
+}
+
+.heading {
+  color: silver;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Main wrapper fills remaining height and centers the form vertically */
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Container with login/signup form */
+.container {
+  background-color: rgba(30, 30, 30, 0.85);
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-height: 85vh; 
+  overflow-y: auto;
+  max-width: 400px; /* Reduced max width */
+  box-shadow: 0 0 15px rgba(192, 192, 192, 0.4);
+  margin: auto; /* Center horizontally */
+}
+
+/* Toggle buttons for role switching */
+.toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.toggle-button {
+  background-color: transparent;
+  border: 1px solid #c0c0c0;
+  color: #c0c0c0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-button:hover,
+.toggle-button.active {
+  background-color: #c0c0c0;
+  color: #000;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: #1c1c1c;
+  color: #f0f0f0;
+  font-size: 14px;
+}
+
+/* Submit button styling */
+.submit-button {
+  padding: 12px;
+  background-color: #007bff; /* Bright blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Text for switching between login/signup */
+.switch-text {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.switch-button {
+  background: none;
+  color: #c0c0c0;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Media Query: Adjust the width for larger screens */
+@media (min-width: 768px) {
+  .container {
+    max-width: 500px; /* Reduce max width on larger screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 550px; /* Further reduce max width for very large screens */
+  }
+}
